@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/too-common-name/myreadings-gitops.git
-    targetRevision: HEAD
+    targetRevision: demo-single-cluster
     path: argocd
   destination:
     server: https://kubernetes.default.svc

@@ -2,15 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  # sync-wave: -4 (ACM-ArgoCD integration first)
-  - placements/acm-argocd-integration.yaml
-  # sync-wave: -2 (projects)
-  - projects/myreadings-platform-project.yaml
   - projects/myreadings-project.yaml
-  # sync-wave: -1 (placements before appsets)
-  - placements/dev-placement.yaml
-  - placements/prod-placement.yaml
-  # sync-wave: 0 (applications and appsets)
-  - acm-policies-app.yaml
-  - myreadings-appset.yaml
+  - myreadings-operators-app.yaml
+  - myreadings-app.yaml
   - myreadings-tekton-app.yaml

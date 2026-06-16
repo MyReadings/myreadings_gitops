@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: myreadings-app
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
       containers:
@@ -21,7 +21,7 @@ kind: Deployment
 metadata:
   name: myreadings-ui
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
       containers:

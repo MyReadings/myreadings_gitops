@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: myreadings-user-service-config
 data:
-  QUARKUS_OIDC_TOKEN_ISSUER: "https://myreadings-keycloak-myreadings-dev.apps.cluster-nvhnt.dynamic.redhatworkshops.io/realms/my-readings"
+  QUARKUS_OIDC_TOKEN_ISSUER: "https://myreadings-keycloak-myreadings-dev.apps.cluster-c4nqd.dyn.redhatworkshops.io/realms/my-readings"

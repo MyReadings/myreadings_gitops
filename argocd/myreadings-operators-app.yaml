@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: myreadings-tekton
+  name: myreadings-operators
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-wave: "-1"
   labels:
     app.kubernetes.io/part-of: myreadings
 spec:
@@ -12,13 +12,14 @@ spec:
   source:
     repoURL: https://github.com/too-common-name/myreadings-gitops.git
     targetRevision: demo-single-cluster
-    path: tekton
+    path: operators
   destination:
     server: https://kubernetes.default.svc
-    namespace: myreadings-dev
+    namespace: openshift-operators
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - SkipDryRunOnMissingResource=true
+      - ServerSideApply=true

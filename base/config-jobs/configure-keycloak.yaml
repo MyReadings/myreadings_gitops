@@ -11,9 +11,6 @@ spec:
   backoffLimit: 3
   ttlSecondsAfterFinished: 3600
   template:
-    metadata:
-      annotations:
-        sidecar.istio.io/inject: "false"
     spec:
       serviceAccountName: ansible-configurator
       restartPolicy: Never
@@ -21,20 +18,26 @@ spec:
         - name: ansible
           image: quay.io/rh-ee-drossi/myreadings-ee:latest
           command:
-            - ansible-playbook
-            - configure-keycloak.yml
-            - -e
-            - "app_namespace=myreadings-dev"
-            - -e
-            - "keycloak_realm_name=my-readings"
-            - -e
-            - "keycloak_client=myreadings-client"
-            - -e
-            - "keycloak_client_display_name=My Readings Application"
-            - -e
-            - "keycloak_allow_registration=true"
-            - -e
-            - "frontend_url=https://myreadings-ui-myreadings-dev.apps.cluster-nvhnt.dynamic.redhatworkshops.io"
+            - /bin/sh
+            - -c
+            - |
+              ansible-playbook configure-keycloak.yml \
+                -e "app_namespace=$APP_NAMESPACE" \
+                -e "keycloak_realm_name=my-readings" \
+                -e "keycloak_client=myreadings-client" \
+                -e "keycloak_client_display_name=My Readings Application" \
+                -e "keycloak_allow_registration=true" \
+                -e "frontend_url=$FRONTEND_URL"
+          env:
+            - name: APP_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: FRONTEND_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: myreadings-app-config
+                  key: FRONTEND_URL
           resources:
             requests:
               cpu: 100m

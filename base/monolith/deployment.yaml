@@ -17,12 +17,10 @@ spec:
       labels:
         app.kubernetes.io/name: myreadings-app
         app.kubernetes.io/part-of: myreadings
-      annotations:
-        proxy.istio.io/config: '{"holdApplicationUntilProxyStarts": true}'
     spec:
       containers:
         - name: myreadings-app
-          image: quay.io/too-common-name/myreadings-app:latest
+          image: quay.io/rh-ee-drossi/myreadings-app:latest
           ports:
             - containerPort: 8081
               protocol: TCP

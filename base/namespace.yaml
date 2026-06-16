@@ -4,5 +4,3 @@ metadata:
   name: myreadings
   labels:
     app.kubernetes.io/part-of: myreadings
-    istio-discovery: enabled
-    istio-injection: enabled

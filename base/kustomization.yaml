@@ -8,6 +8,7 @@ resources:
   - postgres/postgrescluster.yaml
   - keycloak/keycloak.yaml
   - keycloak/route.yaml
+  - rabbitmq/scc-anyuid.yaml
   - rabbitmq/rabbitmqcluster.yaml
   - monolith/configmap.yaml
   - monolith/deployment.yaml

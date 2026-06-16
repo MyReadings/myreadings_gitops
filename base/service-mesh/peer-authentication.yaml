@@ -1,9 +1,0 @@
-apiVersion: security.istio.io/v1
-kind: PeerAuthentication
-metadata:
-  name: default
-  labels:
-    app.kubernetes.io/part-of: myreadings
-spec:
-  mtls:
-    mode: PERMISSIVE

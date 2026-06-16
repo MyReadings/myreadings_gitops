@@ -15,7 +15,11 @@ spec:
 
   destinations:
     - namespace: "myreadings-*"
-      server: "*"
+      server: https://kubernetes.default.svc
+    - namespace: openshift-operators
+      server: https://kubernetes.default.svc
+    - namespace: rhbk-operator
+      server: https://kubernetes.default.svc
 
   clusterResourceWhitelist:
     - group: ""
@@ -52,14 +56,10 @@ spec:
       kind: TriggerBinding
     - group: triggers.tekton.dev
       kind: TriggerTemplate
-    - group: security.istio.io
-      kind: PeerAuthentication
-    - group: security.istio.io
-      kind: AuthorizationPolicy
-    - group: networking.istio.io
-      kind: VirtualService
-    - group: networking.istio.io
-      kind: DestinationRule
+    - group: operators.coreos.com
+      kind: Subscription
+    - group: operators.coreos.com
+      kind: OperatorGroup
 
   roles:
     - name: myreadings-deployer

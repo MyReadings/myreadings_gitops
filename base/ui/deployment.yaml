@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: myreadings-ui
-          image: quay.io/too-common-name/myreadings-ui:latest
+          image: quay.io/rh-ee-drossi/myreadings-ui:latest
           ports:
             - containerPort: 8080
               protocol: TCP
