@@ -30,6 +30,9 @@ spec:
     - name: overlay-path
       type: string
       default: overlays/dev
+    - name: gitops-branch
+      type: string
+      default: demo-single-cluster
 
   workspaces:
     - name: source
@@ -231,7 +234,7 @@ spec:
             BASE_REF="$(params.image-base-ref)"
 
             cd /tmp
-            git clone $(params.gitops-repo-url) gitops
+            git clone -b $(params.gitops-branch) $(params.gitops-repo-url) gitops
             cd gitops/$(params.overlay-path)
 
             if grep -q "name: ${BASE_REF}" kustomization.yaml; then
@@ -245,7 +248,7 @@ spec:
             cat kustomization.yaml
             git add .
             git commit -m "ci: update $(params.image-name) to ${COMMIT_SHA:0:7}"
-            git push origin main
+            git push origin HEAD:$(params.gitops-branch)
       workspaces:
         - name: source
           workspace: source
