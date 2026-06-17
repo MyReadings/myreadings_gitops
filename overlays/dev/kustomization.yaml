@@ -15,6 +15,9 @@ patches:
   - path: patches/user-service-oidc-issuer.yaml
 
 images:
+- name: quay.io/rh-ee-drossi/myreadings-app
+  newName: image-registry.openshift-image-registry.svc:5000/myreadings-dev/myreadings-app
+  newTag: 6698310932654c15ec6e5eb609fec4019a2545cf
 - name: quay.io/rh-ee-drossi/myreadings-ui
   newName: image-registry.openshift-image-registry.svc:5000/myreadings-dev/myreadings-ui
   newTag: e6d2ab3df3ed2fc3fd75435e4f92dc6b6cad68a9
