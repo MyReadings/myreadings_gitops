@@ -100,6 +100,31 @@ spec:
         - name: maven-settings
           workspace: maven-settings
 
+    - name: publish-common-utils
+      when:
+        - input: $(params.image-name)
+          operator: in
+          values: ["myreadings-app"]
+      runAfter:
+        - lint
+        - unit-tests
+      taskRef:
+        name: maven-test
+      params:
+        - name: GOALS
+          value:
+            - deploy
+            - -pl common-utils
+            - -am
+            - -DskipTests
+        - name: CONTEXT_DIR
+          value: $(params.context-dir)
+      workspaces:
+        - name: source
+          workspace: source
+        - name: maven-settings
+          workspace: maven-settings
+
     - name: prepare-build
       runAfter:
         - lint
