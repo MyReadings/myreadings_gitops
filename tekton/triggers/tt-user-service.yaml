@@ -34,7 +34,7 @@ spec:
           - name: image-base-ref
             value: quay.io/too-common-name/myreadings-user-service
           - name: overlay-path
-            value: overlays/dev
+            value: overlays/dev-refactored
         workspaces:
           - name: source
             volumeClaimTemplate:

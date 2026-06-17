@@ -23,7 +23,7 @@ spec:
     - name: image-base-ref
       value: quay.io/rh-ee-drossi/myreadings-user-service
     - name: overlay-path
-      value: overlays/dev
+      value: overlays/dev-refactored
   workspaces:
     - name: source
       volumeClaimTemplate:

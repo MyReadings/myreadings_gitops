@@ -13,9 +13,9 @@ resources:
   - monolith/configmap.yaml
   - monolith/deployment.yaml
   - monolith/service.yaml
-  - user-service/configmap.yaml
-  - user-service/deployment.yaml
-  - user-service/service.yaml
+  # - user-service/configmap.yaml
+  # - user-service/deployment.yaml
+  # - user-service/service.yaml
   - ui/deployment.yaml
   - ui/service.yaml
   - ui/route.yaml

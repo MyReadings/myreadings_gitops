@@ -18,7 +18,7 @@ spec:
             name: "cel"
           params:
             - name: "filter"
-              value: "body.repository.name == 'myreadings' && body.ref.startsWith('refs/heads/refactored')"
+              value: "body.repository.name == 'myreadings' && body.ref.startsWith('refs/heads/main')"
       bindings:
         - ref: github-push-binding
       template:

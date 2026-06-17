@@ -102,9 +102,9 @@ spec:
 
     - name: publish-common-utils
       when:
-        - input: $(params.image-name)
+        - input: $(params.overlay-path)
           operator: in
-          values: ["myreadings-app"]
+          values: ["overlays/dev-refactored"]
       runAfter:
         - lint
         - unit-tests

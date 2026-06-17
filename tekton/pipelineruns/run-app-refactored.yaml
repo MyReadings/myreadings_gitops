@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
-  generateName: myreadings-app-
+  generateName: myreadings-app-refactored-
   labels:
     app.kubernetes.io/part-of: myreadings
     tekton.dev/pipeline: myreadings-maven-build
@@ -13,7 +13,7 @@ spec:
     - name: git-url
       value: https://github.com/too-common-name/myreadings.git
     - name: git-revision
-      value: main
+      value: refactored
     - name: dockerfile-path
       value: application/src/main/docker/Dockerfile
     - name: context-dir
@@ -23,7 +23,7 @@ spec:
     - name: image-base-ref
       value: quay.io/rh-ee-drossi/myreadings-app
     - name: overlay-path
-      value: overlays/dev
+      value: overlays/dev-refactored
   workspaces:
     - name: source
       volumeClaimTemplate:
