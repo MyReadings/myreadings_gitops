@@ -9,6 +9,7 @@ spec:
   selector:
     app.kubernetes.io/name: myreadings-app
   ports:
-    - port: 8081
+    - name: http
+      port: 8081
       targetPort: 8081
       protocol: TCP

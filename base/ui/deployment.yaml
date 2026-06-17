@@ -31,10 +31,6 @@ spec:
                   fieldPath: metadata.namespace
             - name: USER_SERVICE_URL
               value: http://myreadings-app:8081
-            - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: http://myreadings-collector:4317
-            - name: OTEL_SERVICE_NAME
-              value: myreadings-ui
           readinessProbe:
             httpGet:
               path: /healthz
