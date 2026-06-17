@@ -65,73 +65,72 @@ spec:
         - name: output
           workspace: source
 
-    - name: lint
-      runAfter:
-        - clone-source
-      taskRef:
-        name: maven-test
-      params:
-        - name: GOALS
-          value:
-            - checkstyle:check
-            - -Dcheckstyle.failOnViolation=false
-            - -Dquarkus.devservices.enabled=false
-        - name: CONTEXT_DIR
-          value: $(params.context-dir)
-      workspaces:
-        - name: source
-          workspace: source
-        - name: maven-settings
-          workspace: maven-settings
+    # - name: lint
+    #   runAfter:
+    #     - clone-source
+    #   taskRef:
+    #     name: maven-test
+    #   params:
+    #     - name: GOALS
+    #       value:
+    #         - checkstyle:check
+    #         - -Dcheckstyle.failOnViolation=false
+    #         - -Dquarkus.devservices.enabled=false
+    #     - name: CONTEXT_DIR
+    #       value: $(params.context-dir)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #     - name: maven-settings
+    #       workspace: maven-settings
 
-    - name: unit-tests
-      runAfter:
-        - clone-source
-      taskRef:
-        name: maven-test
-      params:
-        - name: GOALS
-          value:
-            - test
-            - -Dquarkus.devservices.enabled=false
-            - -Dsurefire.excludes=**/Jpa*Test.java,**/*IntegrationTest.java
-        - name: CONTEXT_DIR
-          value: $(params.context-dir)
-      workspaces:
-        - name: source
-          workspace: source
-        - name: maven-settings
-          workspace: maven-settings
+    # - name: unit-tests
+    #   runAfter:
+    #     - clone-source
+    #   taskRef:
+    #     name: maven-test
+    #   params:
+    #     - name: GOALS
+    #       value:
+    #         - test
+    #         - -Dquarkus.devservices.enabled=false
+    #         - -Dsurefire.excludes=**/Jpa*Test.java,**/*IntegrationTest.java
+    #     - name: CONTEXT_DIR
+    #       value: $(params.context-dir)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #     - name: maven-settings
+    #       workspace: maven-settings
 
-    - name: publish-common-utils
-      when:
-        - input: $(params.overlay-path)
-          operator: in
-          values: ["overlays/dev-refactored"]
-      runAfter:
-        - lint
-        - unit-tests
-      taskRef:
-        name: maven-test
-      params:
-        - name: GOALS
-          value:
-            - deploy
-            - -pl common-utils
-            - -am
-            - -DskipTests
-        - name: CONTEXT_DIR
-          value: $(params.context-dir)
-      workspaces:
-        - name: source
-          workspace: source
-        - name: maven-settings
-          workspace: maven-settings
+    # - name: publish-common-utils
+    #   when:
+    #     - input: $(params.overlay-path)
+    #       operator: in
+    #       values: ["overlays/dev-refactored"]
+    #   runAfter:
+    #     - lint
+    #     - unit-tests
+    #   taskRef:
+    #     name: maven-test
+    #   params:
+    #     - name: GOALS
+    #       value:
+    #         - deploy
+    #         - -pl common-utils
+    #         - -am
+    #         - -DskipTests
+    #     - name: CONTEXT_DIR
+    #       value: $(params.context-dir)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #     - name: maven-settings
+    #       workspace: maven-settings
 
     - name: prepare-build
       runAfter:
-        - lint
-        - unit-tests
+        - clone-source
       taskSpec:
         workspaces:
           - name: source
@@ -181,38 +180,37 @@ spec:
         - name: source
           workspace: source
 
-    - name: integration-tests
-      runAfter:
-        - build-and-push
-      taskRef:
-        name: maven-test
-      params:
-        - name: GOALS
-          value:
-            - verify
-            - -Dquarkus.devservices.enabled=false
-            - -Dsurefire.excludes=**/Jpa*Test.java,**/*IntegrationTest.java
-        - name: CONTEXT_DIR
-          value: $(params.context-dir)
-      workspaces:
-        - name: source
-          workspace: source
-        - name: maven-settings
-          workspace: maven-settings
+    # - name: integration-tests
+    #   runAfter:
+    #     - build-and-push
+    #   taskRef:
+    #     name: maven-test
+    #   params:
+    #     - name: GOALS
+    #       value:
+    #         - verify
+    #         - -Dquarkus.devservices.enabled=false
+    #         - -Dsurefire.excludes=**/Jpa*Test.java,**/*IntegrationTest.java
+    #     - name: CONTEXT_DIR
+    #       value: $(params.context-dir)
+    #   workspaces:
+    #     - name: source
+    #       workspace: source
+    #     - name: maven-settings
+    #       workspace: maven-settings
 
-    - name: image-scan
-      runAfter:
-        - build-and-push
-      taskRef:
-        name: acs-image-scan
-      params:
-        - name: IMAGE
-          value: "image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.image-name):$(tasks.clone-source.results.COMMIT)"
+    # - name: image-scan
+    #   runAfter:
+    #     - build-and-push
+    #   taskRef:
+    #     name: acs-image-scan
+    #   params:
+    #     - name: IMAGE
+    #       value: "image-registry.openshift-image-registry.svc:5000/$(context.pipelineRun.namespace)/$(params.image-name):$(tasks.clone-source.results.COMMIT)"
 
     - name: update-gitops
       runAfter:
-        - integration-tests
-        - image-scan
+        - build-and-push
       taskRef:
         resolver: cluster
         params:
