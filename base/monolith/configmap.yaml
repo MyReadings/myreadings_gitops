@@ -14,3 +14,4 @@ data:
   RABBITMQ_BINDING_KEY: KK.EVENT.CLIENT.my-readings.SUCCESS.myreadings-client.REGISTER
   USER_SERVICE_URL: http://myreadings-user-service:8083
   FRONTEND_URL: https://myreadings-ui-NAMESPACE.apps.CLUSTER_DOMAIN
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://myreadings-collector:4317

@@ -12,3 +12,4 @@ data:
   RABBITMQ_VHOST: my-readings
   RABBITMQ_QUEUE_NAME: myreadings-queue
   RABBITMQ_BINDING_KEY: KK.EVENT.CLIENT.my-readings.SUCCESS.myreadings-client.REGISTER
+  OTEL_EXPORTER_OTLP_ENDPOINT: http://myreadings-collector:4317
