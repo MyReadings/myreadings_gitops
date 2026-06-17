@@ -23,7 +23,7 @@ spec:
       description: "Target image name (e.g. myreadings-ui)"
     - name: image-base-ref
       type: string
-      description: "Base image ref in the deployment YAML (e.g. quay.io/too-common-name/myreadings-ui)"
+      description: "Base image ref in the deployment YAML (e.g. quay.io/rh-ee-drossi/myreadings-ui)"
     - name: gitops-repo-url
       type: string
       default: https://github.com/too-common-name/myreadings-gitops.git

@@ -32,7 +32,7 @@ spec:
           - name: image-name
             value: myreadings-user-service
           - name: image-base-ref
-            value: quay.io/too-common-name/myreadings-user-service
+            value: quay.io/rh-ee-drossi/myreadings-user-service
           - name: overlay-path
             value: overlays/dev-refactored
         workspaces:
