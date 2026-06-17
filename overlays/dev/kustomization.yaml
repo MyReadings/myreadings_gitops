@@ -15,6 +15,9 @@ patches:
   - path: patches/frontend-url.yaml
 
 images:
+- name: quay.io/rh-ee-drossi/myreadings-app
+  newName: image-registry.openshift-image-registry.svc:5000/myreadings-dev/myreadings-app
+  newTag: 6698310932654c15ec6e5eb609fec4019a2545cf
 - name: quay.io/too-common-name/myreadings-app
   newName: image-registry.openshift-image-registry.svc:5000/myreadings-dev/myreadings-app
   newTag: 8e97fcfd98372bd541eb8d53a15dd0870ecd9ce9
