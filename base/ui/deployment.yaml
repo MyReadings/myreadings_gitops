@@ -29,6 +29,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: USER_SERVICE_URL
+              value: http://myreadings-app:8081
           readinessProbe:
             httpGet:
               path: /healthz

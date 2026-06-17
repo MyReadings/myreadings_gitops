@@ -14,3 +14,10 @@ patches:
       - op: add
         path: /data/USER_SERVICE_URL
         value: http://myreadings-user-service:8083
+  - target:
+      kind: Deployment
+      name: myreadings-ui
+    patch: |
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/value
+        value: http://myreadings-user-service:8083
