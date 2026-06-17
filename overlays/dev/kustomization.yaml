@@ -17,7 +17,7 @@ patches:
 images:
 - name: quay.io/rh-ee-drossi/myreadings-app
   newName: image-registry.openshift-image-registry.svc:5000/myreadings-dev/myreadings-app
-  newTag: 8cc74cb9ddf9435a57201c4571de5a1a28480810
+  newTag: 95d156b8a6b32f60993916c7e63a41dacc99960b
 - name: quay.io/rh-ee-drossi/myreadings-ui
   newName: image-registry.openshift-image-registry.svc:5000/myreadings-dev/myreadings-ui
   newTag: 9e359bd7207e76ac2810eaa480c0621e8181b507
