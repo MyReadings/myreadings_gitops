@@ -45,7 +45,7 @@
       - "{{ myreadings_root_url }}"
     public_client: true
     standard_flow_enabled: true
-    direct_access_grants_enabled: false
+    direct_access_grants_enabled: true # to run stress test
     implicit_flow_enabled: false
     attributes:
       pkce.code.challenge.method: "S256"
