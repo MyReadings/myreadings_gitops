@@ -18,6 +18,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: myreadings-dev
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
       - SkipDryRunOnMissingResource=true
