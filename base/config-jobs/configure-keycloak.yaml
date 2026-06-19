@@ -14,13 +14,39 @@ spec:
     spec:
       serviceAccountName: ansible-configurator
       restartPolicy: Never
-      containers:
-        - name: ansible
-          image: quay.io/rh-ee-drossi/myreadings-ee:latest
+      initContainers:
+        - name: clone-repo
+          image: alpine/git:latest
+          imagePullPolicy: Always
           command:
             - /bin/sh
             - -c
             - |
+              git clone --depth 1 --branch ${GIT_BRANCH} ${GIT_REPO_URL} /workspace
+          env:
+            - name: GIT_REPO_URL
+              value: "https://github.com/too-common-name/myreadings-gitops.git"
+            - name: GIT_BRANCH
+              value: "demo-single-cluster"
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+      containers:
+        - name: ansible
+          image: quay.io/rh-ee-drossi/myreadings-ee:latest
+          imagePullPolicy: Always
+          command:
+            - /bin/sh
+            - -c
+            - |
+              cd /workspace/ansible && \
               ansible-playbook configure-keycloak.yml \
                 -e "app_namespace=$APP_NAMESPACE" \
                 -e "keycloak_realm_name=my-readings" \
@@ -38,6 +64,9 @@ spec:
                 configMapKeyRef:
                   name: myreadings-app-config
                   key: FRONTEND_URL
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
           resources:
             requests:
               cpu: 100m
@@ -45,3 +74,6 @@ spec:
             limits:
               cpu: 500m
               memory: 512Mi
+      volumes:
+        - name: workspace
+          emptyDir: {}
