@@ -84,15 +84,15 @@ spec:
               port: 8081
             initialDelaySeconds: 20
             periodSeconds: 10
-            timeoutSeconds: 5
+            timeoutSeconds: 15
           livenessProbe:
             httpGet:
               path: /q/health/live
               port: 8081
             initialDelaySeconds: 30
             periodSeconds: 15
-            timeoutSeconds: 10
-            failureThreshold: 5
+            timeoutSeconds: 30
+            failureThreshold: 10
           startupProbe:
             httpGet:
               path: /q/health/started
