@@ -20,4 +20,4 @@ images:
   newTag: 9beca20a380c727d2a250e51d74020eb2ef887b2
 - name: quay.io/rh-ee-drossi/myreadings-ui
   newName: image-registry.openshift-image-registry.svc:5000/myreadings-dev/myreadings-ui
-  newTag: 8720fa506159b4351db0e37e731a771a5010dff5
+  newTag: ff30c8de55d79cbc1581667086e510cdf89d098d
