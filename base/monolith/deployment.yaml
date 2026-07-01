@@ -82,8 +82,8 @@ spec:
             httpGet:
               path: /q/health/ready
               port: 8081
-            initialDelaySeconds: 20
-            periodSeconds: 10
+            initialDelaySeconds: 10
+            periodSeconds: 5
             timeoutSeconds: 15
           livenessProbe:
             httpGet:
