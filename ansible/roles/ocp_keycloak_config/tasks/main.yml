@@ -64,3 +64,24 @@
   loop:
     - user
     - admin
+
+- name: Create test user for stress testing
+  middleware_automation.keycloak.keycloak_user:
+    auth_keycloak_url: "{{ keycloak_admin_url }}"
+    auth_realm: "master"
+    auth_client_id: "admin-cli"
+    auth_username: "{{ keycloak_admin_user }}"
+    auth_password: "{{ keycloak_admin_password }}"
+    realm: "{{ keycloak_realm }}"
+    username: "{{ test_user }}"
+    first_name: "Test"
+    last_name: "User"
+    email: "{{ test_user }}@example.com"
+    enabled: true
+    email_verified: true
+    credentials:
+      - type: password
+        value: "{{ test_password }}"
+        temporary: false
+    state: present
+  when: test_user is defined and test_password is defined
